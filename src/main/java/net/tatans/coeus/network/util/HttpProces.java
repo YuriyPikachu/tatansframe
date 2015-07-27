@@ -16,16 +16,15 @@ import android.util.Log;
  * @version 1.0
  */
 public class HttpProces {
-	private static SoundPoolUtil soundPool;
+	//private static SoundPoolUtil soundPool;
 	public static Boolean bSound = true;
-
 	@SuppressLint("UseSparseArrays")
 	public static void initHttp(Context context) {
 		Log.d("HttpProces", "initSoundPlay");
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-		map.put(1, R.raw.basev2_sound_msg2);
-		map.put(2, R.raw.fail);
-		map.put(3, R.raw.basev2_sound_download0);
+//		map.put(1, R.raw.basev2_sound_msg2);
+//		map.put(2, R.raw.fail);
+//		map.put(3, R.raw.basev2_sound_download0);
 //		soundPool = new SoundPoolUtil(context, map);
 	}
 

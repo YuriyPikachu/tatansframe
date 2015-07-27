@@ -44,6 +44,7 @@ public class SoundPoolUtil implements Runnable {
 	/**
 	 * @param context
 	 */
+	@SuppressLint("UseSparseArrays")
 	public SoundPoolUtil(Context context, String path) {
 		this.context = context;
 		this.path = path;
@@ -59,6 +60,7 @@ public class SoundPoolUtil implements Runnable {
 	/**
 	 * @param context
 	 */
+	@SuppressLint("UseSparseArrays")
 	public SoundPoolUtil(Context context, Map<Integer, Integer> map) {
 		this.map = map;
 		this.context = context;
