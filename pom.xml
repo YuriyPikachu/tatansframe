@@ -8,9 +8,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>coeus-network</artifactId>
-	<packaging>apklib</packaging>
+	<packaging>aar</packaging>
 	<name>coeus-network</name>
-	<version>0.0.1-release</version>
+	<version>0.0.3-release</version>
 	<description>coeus网络框架</description>
 	<dependencies>
 	    <dependency>

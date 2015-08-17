@@ -41,7 +41,7 @@ public class  HttpHandler  <T> extends  AsyncTask<Object, Object, Object> implem
 	private final StringEntityHandler mStrEntityHandler = new StringEntityHandler();
 	private final FileEntityHandler mFileEntityHandler = new FileEntityHandler();
 	
-	private final AjaxCallBack<T> callback;
+	private final HttpRequestCallBack<T> callback;
 	private Context context;
 	private int executionCount = 0;
 	private String targetUrl = null; //下载的路径
@@ -49,7 +49,7 @@ public class  HttpHandler  <T> extends  AsyncTask<Object, Object, Object> implem
 	private String charset;
 	private String oauth;
 
-	public HttpHandler(CoeusHttpClient client, HttpContext httpcontext, AjaxCallBack<T> callback,String charset,Context context,String oauth) {
+	public HttpHandler(CoeusHttpClient client, HttpContext httpcontext, HttpRequestCallBack<T> callback,String charset,Context context,String oauth) {
 		this.client = client;
 		this.httpcontext = httpcontext;
 		this.callback = callback;

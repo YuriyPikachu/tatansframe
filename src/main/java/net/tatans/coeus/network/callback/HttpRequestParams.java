@@ -44,17 +44,17 @@ import org.apache.http.message.BasicNameValuePair;
  * });
  * </pre>
  */
-public class AjaxParams {
+public class HttpRequestParams {
     private static String ENCODING = "UTF-8";
 
     protected ConcurrentHashMap<String, String> urlParams;
     protected ConcurrentHashMap<String, FileWrapper> fileParams;
 
-    public AjaxParams() {
+    public HttpRequestParams() {
         init();
     }
 
-    public AjaxParams(Map<String, String> source) {
+    public HttpRequestParams(Map<String, String> source) {
         init();
 
         for(Map.Entry<String, String> entry : source.entrySet()) {
@@ -62,12 +62,12 @@ public class AjaxParams {
         }
     }
 
-    public AjaxParams(String key, String value) {
+    public HttpRequestParams(String key, String value) {
         init();
         put(key, value);
     }
 
-    public AjaxParams(Object... keysAndValues) {
+    public HttpRequestParams(Object... keysAndValues) {
       init();
       int len = keysAndValues.length;
       if (len % 2 != 0)

@@ -13,8 +13,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
 
 import net.tatans.coeus.network.DefaultHttpClient.CoeusHttpClient;
-import net.tatans.coeus.network.callback.AjaxCallBack;
-import net.tatans.coeus.network.callback.AjaxParams;
+import net.tatans.coeus.network.callback.HttpRequestCallBack;
+import net.tatans.coeus.network.callback.HttpRequestParams;
 import net.tatans.coeus.network.callback.HttpHandler;
 import net.tatans.coeus.network.callback.RetryHandler;
 import net.tatans.coeus.network.callback.SyncRequestHandler;
@@ -206,15 +206,15 @@ public class TatansHttp {
     
 
     //------------------get 请求-----------------------
-    public void get( String url, AjaxCallBack<? extends Object> callBack) {
+    public void get( String url, HttpRequestCallBack<? extends Object> callBack) {
         get( url, null, callBack);
     }
 
-    public void get( String url, AjaxParams params, AjaxCallBack<? extends Object> callBack) {
+    public void get( String url, HttpRequestParams params, HttpRequestCallBack<? extends Object> callBack) {
         sendRequest(httpClient, httpContext, new HttpGet(getUrlWithQueryString(url, params)), null,null,null, callBack);
     }
     
-    public void get( String url, Header[] headers, AjaxParams params, AjaxCallBack<? extends Object> callBack) {
+    public void get( String url, Header[] headers, HttpRequestParams params, HttpRequestCallBack<? extends Object> callBack) {
         HttpUriRequest request = new HttpGet(getUrlWithQueryString(url, params));
         if(headers != null) request.setHeaders(headers);
         sendRequest(httpClient, httpContext, request, null,null,null, callBack);
@@ -224,13 +224,13 @@ public class TatansHttp {
     	return getSync( url, null);
     }
 
-    public Object getSync( String url, AjaxParams params) {
+    public Object getSync( String url, HttpRequestParams params) {
     	 HttpUriRequest request = new HttpGet(getUrlWithQueryString(url, params));
     	return sendSyncRequest(httpClient, httpContext, request, null);
     }
     
     
-    public Object getSync( String url, Header[] headers, AjaxParams params) {
+    public Object getSync( String url, Header[] headers, HttpRequestParams params) {
         HttpUriRequest request = new HttpGet(getUrlWithQueryString(url, params));
         if(headers != null) request.setHeaders(headers);
         return sendSyncRequest(httpClient, httpContext, request, null);
@@ -238,28 +238,28 @@ public class TatansHttp {
 
 
     //------------------post 请求-----------------------
-    public void post(String url, AjaxCallBack<? extends Object> callBack) {
+    public void post(String url, HttpRequestCallBack<? extends Object> callBack) {
         post(url, null, callBack);
     }
 
-    public void post(String url, AjaxParams params, AjaxCallBack<? extends Object> callBack) {
+    public void post(String url, HttpRequestParams params, HttpRequestCallBack<? extends Object> callBack) {
         post(url, paramsToEntity(params), null, callBack);
     }
-    public void postCas(String url, AjaxParams params,Activity context, AjaxCallBack<? extends Object> callBack) {
+    public void postCas(String url, HttpRequestParams params,Activity context, HttpRequestCallBack<? extends Object> callBack) {
     	sendRequest(httpClient, httpContext, addEntityToRequestBase(new HttpPost(url), paramsToEntity(params)), null,context,"yes", callBack);
     }
-    public void post( String url, HttpEntity entity, String contentType, AjaxCallBack<? extends Object> callBack) {
+    public void post( String url, HttpEntity entity, String contentType, HttpRequestCallBack<? extends Object> callBack) {
         sendRequest(httpClient, httpContext, addEntityToRequestBase(new HttpPost(url), entity), contentType,null,null, callBack);
     }
 
-    public <T> void post( String url, Header[] headers, AjaxParams params, String contentType,AjaxCallBack<T> callBack) {
+    public <T> void post( String url, Header[] headers, HttpRequestParams params, String contentType,HttpRequestCallBack<T> callBack) {
         HttpEntityEnclosingRequestBase request = new HttpPost(url);
         if(params != null) request.setEntity(paramsToEntity(params));
         if(headers != null) request.setHeaders(headers);
         sendRequest(httpClient, httpContext, request, contentType,null,null, callBack);
     }
 
-    public void post( String url, Header[] headers, HttpEntity entity, String contentType,AjaxCallBack<? extends Object> callBack) {
+    public void post( String url, Header[] headers, HttpEntity entity, String contentType,HttpRequestCallBack<? extends Object> callBack) {
         HttpEntityEnclosingRequestBase request = addEntityToRequestBase(new HttpPost(url), entity);
         if(headers != null) request.setHeaders(headers);
         sendRequest(httpClient, httpContext, request, contentType,null,null, callBack);
@@ -270,7 +270,7 @@ public class TatansHttp {
     	return postSync(url, null);
     }
     
-    public Object postSync(String url, AjaxParams params) {
+    public Object postSync(String url, HttpRequestParams params) {
     	return postSync(url, paramsToEntity(params), null);
     }
     
@@ -279,7 +279,7 @@ public class TatansHttp {
     }
     
     
-    public Object postSync( String url, Header[] headers, AjaxParams params, String contentType) {
+    public Object postSync( String url, Header[] headers, HttpRequestParams params, String contentType) {
         HttpEntityEnclosingRequestBase request = new HttpPost(url);
         if(params != null) request.setEntity(paramsToEntity(params));
         if(headers != null) request.setHeaders(headers);
@@ -295,20 +295,20 @@ public class TatansHttp {
 
   //------------------put 请求-----------------------
 
-    public void put(String url, AjaxCallBack<? extends Object> callBack) {
+    public void put(String url, HttpRequestCallBack<? extends Object> callBack) {
         put(url, null, callBack);
     }
 
    
-    public void put( String url, AjaxParams params, AjaxCallBack<? extends Object> callBack) {
+    public void put( String url, HttpRequestParams params, HttpRequestCallBack<? extends Object> callBack) {
         put(url, paramsToEntity(params), null, callBack);
     }
 
-    public void put( String url, HttpEntity entity, String contentType, AjaxCallBack<? extends Object> callBack) {
+    public void put( String url, HttpEntity entity, String contentType, HttpRequestCallBack<? extends Object> callBack) {
         sendRequest(httpClient, httpContext, addEntityToRequestBase(new HttpPut(url), entity), contentType,null,null,callBack);
     }
     
-    public void put(String url,Header[] headers, HttpEntity entity, String contentType, AjaxCallBack<? extends Object> callBack) {
+    public void put(String url,Header[] headers, HttpEntity entity, String contentType, HttpRequestCallBack<? extends Object> callBack) {
         HttpEntityEnclosingRequestBase request = addEntityToRequestBase(new HttpPut(url), entity);
         if(headers != null) request.setHeaders(headers);
         sendRequest(httpClient, httpContext, request, contentType,null,null,callBack);
@@ -318,7 +318,7 @@ public class TatansHttp {
     	return putSync(url, null);
     }
     
-    public Object putSync( String url, AjaxParams params) {
+    public Object putSync( String url, HttpRequestParams params) {
         return putSync(url, paramsToEntity(params),null);
     }
     
@@ -334,12 +334,12 @@ public class TatansHttp {
     }
 
     //------------------delete 请求-----------------------
-    public void delete( String url, AjaxCallBack<? extends Object> callBack) {
+    public void delete( String url, HttpRequestCallBack<? extends Object> callBack) {
         final HttpDelete delete = new HttpDelete(url);
         sendRequest(httpClient, httpContext, delete, null,null,null, callBack);
     }
     
-    public void delete( String url, Header[] headers, AjaxCallBack<? extends Object> callBack) {
+    public void delete( String url, Header[] headers, HttpRequestCallBack<? extends Object> callBack) {
         final HttpDelete delete = new HttpDelete(url);
         if(headers != null) delete.setHeaders(headers);
         sendRequest(httpClient, httpContext, delete, null,null,null,callBack);
@@ -356,20 +356,20 @@ public class TatansHttp {
     }
     
     //---------------------下载---------------------------------------
-    public HttpHandler<File> download(String url,String target,AjaxCallBack<File> callback){
+    public HttpHandler<File> download(String url,String target,HttpRequestCallBack<File> callback){
     	return download(url, null, target, false, callback);
     }
     
 
-    public HttpHandler<File> download(String url,String target,boolean isResume,AjaxCallBack<File> callback){
+    public HttpHandler<File> download(String url,String target,boolean isResume,HttpRequestCallBack<File> callback){
     	 return download(url, null, target, isResume, callback);
     }
     
-    public HttpHandler<File> download( String url,AjaxParams params, String target, AjaxCallBack<File> callback) {
+    public HttpHandler<File> download( String url,HttpRequestParams params, String target, HttpRequestCallBack<File> callback) {
    	 	return download(url, params, target, false, callback);
     }
     
-    public HttpHandler<File> download( String url,AjaxParams params, String target,boolean isResume, AjaxCallBack<File> callback) {
+    public HttpHandler<File> download( String url,HttpRequestParams params, String target,boolean isResume, HttpRequestCallBack<File> callback) {
     	final HttpGet get =  new HttpGet(getUrlWithQueryString(url, params));
     	HttpHandler<File> handler = new HttpHandler<File>(httpClient, httpContext, callback,charset,null,null);
     	handler.executeOnExecutor(executor,get,target,isResume);
@@ -377,7 +377,7 @@ public class TatansHttp {
     }
 
 
-    protected <T> void sendRequest(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType,Activity context,String oauth,AjaxCallBack<T> ajaxCallBack) {
+    protected <T> void sendRequest(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType,Activity context,String oauth,HttpRequestCallBack<T> ajaxCallBack) {
         if(contentType != null) {
             uriRequest.addHeader("Content-Type", contentType);
         }
@@ -394,7 +394,7 @@ public class TatansHttp {
         return new SyncRequestHandler(client, httpContext,charset).sendRequest(uriRequest);
     }
 
-    public static String getUrlWithQueryString(String url, AjaxParams params) {
+    public static String getUrlWithQueryString(String url, HttpRequestParams params) {
         if(params != null) {
             String paramString = params.getParamString();
             url += "?" + paramString;
@@ -402,7 +402,7 @@ public class TatansHttp {
         return url;
     }
 
-    private HttpEntity paramsToEntity(AjaxParams params) {
+    private HttpEntity paramsToEntity(HttpRequestParams params) {
         HttpEntity entity = null;
 
         if(params != null) {

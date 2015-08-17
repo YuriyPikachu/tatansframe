@@ -9,7 +9,7 @@ import net.tatans.coeus.network.util.HttpProces;
  *
  * @param <T> 目前泛型支持 String,File, 以后扩展：JSONObject,Bitmap,byte[],XmlDom
  */
-public abstract class AjaxCallBack<T> {
+public abstract class HttpRequestCallBack<T> {
 	
 	private boolean progress = true;
 	private int rate = 1000 * 1;//每秒
@@ -37,7 +37,7 @@ public abstract class AjaxCallBack<T> {
 	 * @param progress 是否启用进度显示
 	 * @param rate 进度更新频率
 	 */
-	public AjaxCallBack<T> progress(boolean progress , int rate) {
+	public HttpRequestCallBack<T> progress(boolean progress , int rate) {
 		this.progress = progress;
 		this.rate = rate;
 		return this;
