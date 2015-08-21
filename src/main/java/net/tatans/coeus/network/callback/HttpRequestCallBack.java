@@ -7,7 +7,8 @@ import net.tatans.coeus.network.util.HttpProces;
  * 
  * @author 余亮
  *
- * @param <T> 目前泛型支持 String,File, 以后扩展：JSONObject,Bitmap,byte[],XmlDom
+ * @param <T> 目前泛型支持 String,File, 
+ * 以后扩展：JSONObject,Bitmap,byte[],XmlDom
  */
 public abstract class HttpRequestCallBack<T> {
 	

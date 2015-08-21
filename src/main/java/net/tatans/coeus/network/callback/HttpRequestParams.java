@@ -18,31 +18,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 /**
  *  @author Yuliang
- * <p>
- * 使用方法:
- * <p>
- * <pre>
- * AjaxParams params = new AjaxParams();
- * params.put("username", "michael");
- * params.put("password", "123456");
- * params.put("email", "test@tsz.net");
- * params.put("profile_picture", new File("/mnt/sdcard/pic.jpg")); // 上传文件
- * params.put("profile_picture2", inputStream); // 上传数据流
- * params.put("profile_picture3", new ByteArrayInputStream(bytes)); // 提交字节流
- *
- * FinalHttp fh = new FinalHttp();
- * fh.post("http://www.yangfuhai.com", params, new AjaxCallBack<String>(){
- * 		@Override
- *		public void onLoading(long count, long current) {
- *				textView.setText(current+"/"+count);
- *		}
- *
- *		@Override
- *		public void onSuccess(String t) {
- *			textView.setText(t==null?"null":t);
- *		}
- * });
- * </pre>
  */
 public class HttpRequestParams {
     private static String ENCODING = "UTF-8";
