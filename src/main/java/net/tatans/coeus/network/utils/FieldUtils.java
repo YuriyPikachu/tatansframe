@@ -17,10 +17,9 @@ import net.tatans.coeus.annotation.sqlite.Transient;
 /**
  * @title 字段操作工具类
  * @description 描述
- * @company 探索者网络工作室(www.tsz.net)
- * @author michael Young (www.YangFuhai.com)
+ * @author Yuliang
  * @version 1.0
- * @created 2012-10-10
+ * @created 2015-10-10
  */
 public class FieldUtils {
 	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
