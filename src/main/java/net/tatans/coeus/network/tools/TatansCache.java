@@ -735,7 +735,14 @@ public class TatansCache {
 		}
 
 		private long calculateSize(File file) {
-			return file.length();
+			long lFile=0;
+			try {
+				lFile = file.length();
+			} catch (Exception e) {
+				TatansLog.e("文件长度错误溢出");
+				// TODO: handle exception
+			}
+			return lFile;
 		}
 	}
 
