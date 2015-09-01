@@ -15,6 +15,7 @@ import net.tatans.coeus.bitmap.download.Downloader;
 import net.tatans.coeus.bitmap.download.SimpleDownloader;
 import net.tatans.coeus.core.AsyncTask;
 import net.tatans.coeus.network.utils.Utils;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -607,6 +608,7 @@ public class TatansBitmap {
 		private static class AsyncDrawable extends BitmapDrawable {
 			private final WeakReference<BitmapLoadAndDisplayTask> bitmapWorkerTaskReference;
 
+			@SuppressLint("NewApi")
 			public AsyncDrawable(Resources res, Bitmap bitmap,BitmapLoadAndDisplayTask bitmapWorkerTask) {
 				super(res, bitmap);
 				bitmapWorkerTaskReference = new WeakReference<BitmapLoadAndDisplayTask>(

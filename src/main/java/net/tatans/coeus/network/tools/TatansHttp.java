@@ -52,6 +52,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.SyncBasicHttpContext;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 /**
  * 
@@ -369,7 +370,8 @@ public class TatansHttp {
    	 	return download(url, params, target, false, callback);
     }
     
-    public HttpHandler<File> download( String url,HttpRequestParams params, String target,boolean isResume, HttpRequestCallBack<File> callback) {
+    @SuppressLint("NewApi")
+	public HttpHandler<File> download( String url,HttpRequestParams params, String target,boolean isResume, HttpRequestCallBack<File> callback) {
     	final HttpGet get =  new HttpGet(getUrlWithQueryString(url, params));
     	HttpHandler<File> handler = new HttpHandler<File>(httpClient, httpContext, callback,charset,null,null);
     	handler.executeOnExecutor(executor,get,target,isResume);
@@ -377,7 +379,8 @@ public class TatansHttp {
     }
 
 
-    protected <T> void sendRequest(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType,Activity context,String oauth,HttpRequestCallBack<T> ajaxCallBack) {
+    @SuppressLint("NewApi")
+	protected <T> void sendRequest(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType,Activity context,String oauth,HttpRequestCallBack<T> ajaxCallBack) {
         if(contentType != null) {
             uriRequest.addHeader("Content-Type", contentType);
         }

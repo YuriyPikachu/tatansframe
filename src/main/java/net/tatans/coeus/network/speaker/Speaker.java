@@ -3,6 +3,7 @@ package net.tatans.coeus.network.speaker;
 import java.util.HashMap;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -14,6 +15,7 @@ import android.util.Log;
  * @author Administrator
  *
  */
+@SuppressLint("NewApi")
 public class Speaker implements OnInitListener {
 	private static final String talkback_interrupt_action="talkback.interrupt";
 	private String TAG ="coeus-tts-speaker";

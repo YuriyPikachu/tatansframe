@@ -378,6 +378,7 @@ public class AuthenticatorActivity extends Activity {
 		getSpeaker().speech("正在进入无线网络设置界面");
 	}*/
 
+	@SuppressLint("NewApi")
 	public void onLoginClick(View view) {
 		// TODO Auto-generated method stub
 		if (mRequestNewAccount) {

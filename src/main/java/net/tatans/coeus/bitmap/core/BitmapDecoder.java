@@ -3,6 +3,7 @@ package net.tatans.coeus.bitmap.core;
 
 import java.io.FileDescriptor;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +11,8 @@ import android.graphics.BitmapFactory;
 public class BitmapDecoder {
 	private BitmapDecoder(){}
 
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,int reqWidth, int reqHeight) {
+    @SuppressLint("NewApi")
+	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,int reqWidth, int reqHeight) {
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -27,7 +29,8 @@ public class BitmapDecoder {
     }
 
 
-    public static Bitmap decodeSampledBitmapFromDescriptor(FileDescriptor fileDescriptor, int reqWidth, int reqHeight) {
+    @SuppressLint("NewApi")
+	public static Bitmap decodeSampledBitmapFromDescriptor(FileDescriptor fileDescriptor, int reqWidth, int reqHeight) {
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -44,7 +47,8 @@ public class BitmapDecoder {
     }
     
     
-    public static Bitmap decodeSampledBitmapFromByteArray(byte[] data,  int offset, int length, int reqWidth, int reqHeight) {
+    @SuppressLint("NewApi")
+	public static Bitmap decodeSampledBitmapFromByteArray(byte[] data,  int offset, int length, int reqWidth, int reqHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         options.inPurgeable = true;
