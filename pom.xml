@@ -10,7 +10,7 @@
 	<artifactId>coeus-network</artifactId>
 	<packaging>aar</packaging>
 	<name>coeus-network</name>
-	<version>1.0.5-release</version>
+	<version>1.0.6-release</version>
 	<description>coeus网络框架</description>
 	<dependencies>
 	    <dependency>

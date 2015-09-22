@@ -55,7 +55,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	private Map<String, String> infos = new HashMap<String, String>();
 
 	// 用来显示Toast中的信息
-	private String error = "桌面应用出了一点小问题，请稍等。";
+	private String error = "该应用出了一点小问题，请稍等。";
 
 	private static final Map<String, String> regexMap = new HashMap<String, String>();
 
