@@ -10,7 +10,7 @@
 	<artifactId>coeus-network</artifactId>
 	<packaging>apklib</packaging>
 	<name>coeus-network</name>
-	<version>0.1.6-release</version>
+	<version>0.1.7-release</version>
 	<description>coeus网络框架</description>
 	<dependencies>
 	    <dependency>
