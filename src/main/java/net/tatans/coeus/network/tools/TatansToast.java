@@ -10,13 +10,12 @@ import android.widget.Toast;
  */
 public class TatansToast  
 {  
-
   private TatansToast()  
   {  
       /** cannot be instantiated**/
       throw new UnsupportedOperationException("cannot be instantiated");  
   }  
-
+  private static Toast mToast;
   public static boolean isShow = true;  
 /**
    * 短时间显示Toast
@@ -26,8 +25,10 @@ public class TatansToast
    */
   public static void showShort(Context context, CharSequence message)  
   {  
-      if (isShow)  
-          Toast.makeText(context, message, Toast.LENGTH_SHORT).show();  
+      if (isShow){
+    	  mToast =Toast.makeText(context, message, Toast.LENGTH_SHORT);
+    	  mToast.show();
+      }  
   }  
 
   /**
@@ -38,8 +39,10 @@ public class TatansToast
    */
   public static void showShort(Context context, int message)  
   {  
-      if (isShow)  
-          Toast.makeText(context, message, Toast.LENGTH_SHORT).show();  
+      if (isShow){
+    	  mToast=Toast.makeText(context, message, Toast.LENGTH_SHORT);
+    	  mToast.show();
+      }  
   }  
   /**
    * 长时间显示Toast
@@ -49,8 +52,10 @@ public class TatansToast
    */
   public static void showLong(Context context, CharSequence message)  
   {  
-      if (isShow)  
-          Toast.makeText(context, message, Toast.LENGTH_LONG).show();  
+      if (isShow){
+    	  mToast= Toast.makeText(context, message, Toast.LENGTH_LONG);
+    	  mToast.show();
+      }  
   }  
 
   /**
@@ -61,8 +66,10 @@ public class TatansToast
    */
   public static void showLong(Context context, int message)  
   {  
-      if (isShow)  
-          Toast.makeText(context, message, Toast.LENGTH_LONG).show();  
+      if (isShow){
+    	  mToast= Toast.makeText(context, message, Toast.LENGTH_LONG);
+    	  mToast.show();
+      }  
   }  
   /**
    * 自定义显示Toast时间
@@ -73,8 +80,10 @@ public class TatansToast
    */
   public static void show(Context context, CharSequence message, int duration)  
   {  
-      if (isShow)  
-          Toast.makeText(context, message, duration).show();  
+      if (isShow){
+    	  mToast=Toast.makeText(context, message, duration);
+    	  mToast.show();
+      } 
   }  
 
   /**
@@ -86,9 +95,21 @@ public class TatansToast
    */
   public static void show(Context context, int message, int duration)  
   {  
-      if (isShow)  
-          Toast.makeText(context, message, duration).show();  
+      if (isShow){
+    	  mToast=Toast.makeText(context, message, duration);
+    	  mToast.show();
+      }  
   }  
-
+  /**
+   * 取消Toast显示
+   *  
+   */
+  public static void cancel()  
+  {  
+      if (isShow){
+    	  if(null!=mToast)
+    		  mToast.cancel();
+      }  
+  }
 }
 
