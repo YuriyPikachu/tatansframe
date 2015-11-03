@@ -771,7 +771,7 @@ public class TatansDb {
 
 	public static class DaoConfig {
 		private Context mContext = null; // android上下文
-		private String mDbName = "afinal.db"; // 数据库名字
+		private String mDbName = "tatans.db"; // 数据库名字
 		private int dbVersion = 1; // 数据库版本
 		private boolean debug = true; // 是否是调试模式（调试模式 增删改查的时候显示SQL语句）
 		private DbUpdateListener dbUpdateListener;

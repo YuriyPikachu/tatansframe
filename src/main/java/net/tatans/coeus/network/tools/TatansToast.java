@@ -45,6 +45,20 @@ public class TatansToast
       }  
   }  
   /**
+   * 短时间显示Toast把前面cancel掉
+   *  
+   * @param context
+   * @param message
+   */
+  public static void showAndCancel(Context context, CharSequence message)  
+  {  
+	  cancel();
+      if (isShow){
+    	  mToast=Toast.makeText(context, message, Toast.LENGTH_SHORT);
+    	  mToast.show();
+      }  
+  }  
+  /**
    * 长时间显示Toast
    *  
    * @param context
@@ -94,7 +108,7 @@ public class TatansToast
    * @param duration
    */
   public static void show(Context context, int message, int duration)  
-  {  
+  {    
       if (isShow){
     	  mToast=Toast.makeText(context, message, duration);
     	  mToast.show();
