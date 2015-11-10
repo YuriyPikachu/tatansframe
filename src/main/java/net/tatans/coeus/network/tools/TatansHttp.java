@@ -65,10 +65,10 @@ public class TatansHttp {
     private static final String HEADER_ACCEPT_ENCODING = "Accept-Encoding";
     private static final String ENCODING_GZIP = "gzip";
 
-    private static int maxConnections = 10; //http请求最大并发连接数
-    private static int socketTimeout = 10 * 1000; //超时时间，默认10秒
-    private static int maxRetries = 5;//错误尝试次数，错误异常表请在RetryHandler添加
-    private static int httpThreadCount = 3;//http线程池数量
+    public static int maxConnections = 10; //http请求最大并发连接数
+    public static int socketTimeout = 10 * 1000; //超时时间，默认10秒
+    public static int maxRetries = 5;//错误尝试次数，错误异常表请在RetryHandler添加
+    public static int httpThreadCount = 3;//http线程池数量
 
     private final CoeusHttpClient httpClient;
     private final HttpContext httpContext;
