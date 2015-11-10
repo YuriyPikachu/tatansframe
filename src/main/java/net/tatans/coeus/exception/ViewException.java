@@ -2,7 +2,7 @@
 package net.tatans.coeus.exception;
 
 
-public class ViewException extends AfinalException {
+public class ViewException extends TatansException {
 	private static final long serialVersionUID = 1L;
 	private String strMsg = null;
 	public ViewException(String strExce) {

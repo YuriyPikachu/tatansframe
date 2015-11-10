@@ -1,7 +1,7 @@
 
 package net.tatans.coeus.exception;
 
-public class DbException extends AfinalException {
+public class DbException extends TatansException {
 	private static final long serialVersionUID = 1L;
 	
 	public DbException() {}
