@@ -65,10 +65,10 @@ public class TatansHttp {
     private static final String HEADER_ACCEPT_ENCODING = "Accept-Encoding";
     private static final String ENCODING_GZIP = "gzip";
 
-    public static int maxConnections = 10; //http请求最大并发连接数
-    public static int socketTimeout = 10 * 1000; //超时时间，默认10秒
-    public static int maxRetries = 5;//错误尝试次数，错误异常表请在RetryHandler添加
-    public static int httpThreadCount = 3;//http线程池数量
+    private static int maxConnections = 10; //http请求最大并发连接数
+    private static int socketTimeout = 10 * 1000; //超时时间，默认10秒
+    private static int maxRetries = 5;//错误尝试次数，错误异常表请在RetryHandler添加
+    public static int httpThreadCount = 4;//http线程池数量
 
     private final CoeusHttpClient httpClient;
     private final HttpContext httpContext;
@@ -86,7 +86,7 @@ public class TatansHttp {
     };
     
     private static final Executor executor =Executors.newFixedThreadPool(httpThreadCount, sThreadFactory);
-    
+    private static final Executor executorAync =Executors.newFixedThreadPool(httpThreadCount, sThreadFactory);
     public TatansHttp() {
         BasicHttpParams httpParams = new BasicHttpParams();
 
@@ -265,7 +265,30 @@ public class TatansHttp {
         if(headers != null) request.setHeaders(headers);
         sendRequest(httpClient, httpContext, request, contentType,null,null, callBack);
     }
-    
+    //------------------postAsync 请求-----------------------
+    public void postAsync(String url, HttpRequestCallBack<? extends Object> callBack) {
+    	postAsync(url, null, callBack);
+    }
+
+    public void postAsync(String url, HttpRequestParams params, HttpRequestCallBack<? extends Object> callBack) {
+    	postAsync(url, paramsToEntity(params), null, callBack);
+    }
+    public void postAsync( String url, HttpEntity entity, String contentType, HttpRequestCallBack<? extends Object> callBack) {
+    	sendRequestAsync(httpClient, httpContext, addEntityToRequestBase(new HttpPost(url), entity), contentType,null,null, callBack);
+    }
+
+    public <T> void postpostAsync( String url, Header[] headers, HttpRequestParams params, String contentType,HttpRequestCallBack<T> callBack) {
+        HttpEntityEnclosingRequestBase request = new HttpPost(url);
+        if(params != null) request.setEntity(paramsToEntity(params));
+        if(headers != null) request.setHeaders(headers);
+        sendRequestAsync(httpClient, httpContext, request, contentType,null,null, callBack);
+    }
+
+    public void postpostAsync( String url, Header[] headers, HttpEntity entity, String contentType,HttpRequestCallBack<? extends Object> callBack) {
+        HttpEntityEnclosingRequestBase request = addEntityToRequestBase(new HttpPost(url), entity);
+        if(headers != null) request.setHeaders(headers);
+        sendRequest(httpClient, httpContext, request, contentType,null,null, callBack);
+    }
     
     public Object postSync(String url) {
     	return postSync(url, null);
@@ -385,11 +408,18 @@ public class TatansHttp {
             uriRequest.addHeader("Content-Type", contentType);
         }
 
-        new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth)
-        .executeOnExecutor(executor, uriRequest);
+        new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth).executeOnExecutor(executor, uriRequest);
 
     }
-    
+    @SuppressLint("NewApi")
+	protected <T> void sendRequestAsync(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType,Activity context,String oauth,HttpRequestCallBack<T> ajaxCallBack) {
+        if(contentType != null) {
+            uriRequest.addHeader("Content-Type", contentType);
+        }
+
+        new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth).executeOnExecutor(executorAync, uriRequest);
+
+    }
     protected Object sendSyncRequest(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType) {
         if(contentType != null) {
             uriRequest.addHeader("Content-Type", contentType);
