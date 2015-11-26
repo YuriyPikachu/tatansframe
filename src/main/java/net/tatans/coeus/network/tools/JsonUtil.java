@@ -21,6 +21,7 @@ public class JsonUtil {
 	private JSONObject jsonObject;
 	private JsonUtil(String json)
 	{
+		TatansHttp.httpThreadCount=
 		Log.e(TAG, "json="+json);
 		jsonObject = getJsonObject(json);
 		if(jsonObject==null)

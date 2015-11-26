@@ -1,6 +1,5 @@
 package net.tatans.coeus.network.tools;
 
-import android.content.Context;
 import android.widget.Toast;
 /**
  * @author 余亮 <br/> 
@@ -20,13 +19,12 @@ public class TatansToast
 /**
    * 短时间显示Toast
    *  
-   * @param context
    * @param message
    */
-  public static void showShort(Context context, CharSequence message)  
+  public static void showShort(CharSequence message)  
   {  
       if (isShow){
-    	  mToast =Toast.makeText(context, message, Toast.LENGTH_SHORT);
+    	  mToast =Toast.makeText(TatansApplication.getContext(), message, Toast.LENGTH_SHORT);
     	  mToast.show();
       }  
   }  
@@ -34,40 +32,37 @@ public class TatansToast
   /**
    * 短时间显示Toast
    *  
-   * @param context
    * @param message
    */
-  public static void showShort(Context context, int message)  
+  public static void showShort( int message)  
   {  
       if (isShow){
-    	  mToast=Toast.makeText(context, message, Toast.LENGTH_SHORT);
+    	  mToast=Toast.makeText(TatansApplication.getContext(), message, Toast.LENGTH_SHORT);
     	  mToast.show();
       }  
   }  
   /**
    * 短时间显示Toast把前面cancel掉
    *  
-   * @param context
    * @param message
    */
-  public static void showAndCancel(Context context, CharSequence message)  
+  public static void showAndCancel( CharSequence message)  
   {  
 	  cancel();
       if (isShow){
-    	  mToast=Toast.makeText(context, message, Toast.LENGTH_SHORT);
+    	  mToast=Toast.makeText(TatansApplication.getContext(), message, Toast.LENGTH_SHORT);
     	  mToast.show();
       }  
   }  
   /**
    * 长时间显示Toast
    *  
-   * @param context
    * @param message
    */
-  public static void showLong(Context context, CharSequence message)  
+  public static void showLong( CharSequence message)  
   {  
       if (isShow){
-    	  mToast= Toast.makeText(context, message, Toast.LENGTH_LONG);
+    	  mToast= Toast.makeText(TatansApplication.getContext(), message, Toast.LENGTH_LONG);
     	  mToast.show();
       }  
   }  
@@ -75,27 +70,25 @@ public class TatansToast
   /**
    * 长时间显示Toast
    *  
-   * @param context
    * @param message
    */
-  public static void showLong(Context context, int message)  
+  public static void showLong( int message)  
   {  
       if (isShow){
-    	  mToast= Toast.makeText(context, message, Toast.LENGTH_LONG);
+    	  mToast= Toast.makeText(TatansApplication.getContext(), message, Toast.LENGTH_LONG);
     	  mToast.show();
       }  
   }  
   /**
    * 自定义显示Toast时间
    *  
-   * @param context
    * @param message
    * @param duration
    */
-  public static void show(Context context, CharSequence message, int duration)  
+  public static void show( CharSequence message, int duration)  
   {  
       if (isShow){
-    	  mToast=Toast.makeText(context, message, duration);
+    	  mToast=Toast.makeText(TatansApplication.getContext(), message, duration);
     	  mToast.show();
       } 
   }  
@@ -103,14 +96,13 @@ public class TatansToast
   /**
    * 自定义显示Toast时间
    *  
-   * @param context
    * @param message
    * @param duration
    */
-  public static void show(Context context, int message, int duration)  
+  public static void show(int message, int duration)  
   {    
       if (isShow){
-    	  mToast=Toast.makeText(context, message, duration);
+    	  mToast=Toast.makeText(TatansApplication.getContext(), message, duration);
     	  mToast.show();
       }  
   }  

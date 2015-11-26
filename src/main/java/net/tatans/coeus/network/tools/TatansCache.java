@@ -29,7 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -49,12 +48,12 @@ public class TatansCache {
 	private static Map<String, TatansCache> mInstanceMap = new HashMap<String, TatansCache>();
 	private ACacheManager mCache;
 
-	public static TatansCache get(Context ctx) {
-		return get(ctx, "ACache");
+	public static TatansCache get() {
+		return get("TatansCache");
 	}
 
-	public static TatansCache get(Context ctx, String cacheName) {
-		File f = new File(ctx.getCacheDir(), cacheName);
+	public static TatansCache get(String cacheName) {
+		File f = new File(TatansApplication.getContext().getCacheDir(), cacheName);
 		return get(f, MAX_SIZE, MAX_COUNT);
 	}
 
@@ -62,8 +61,8 @@ public class TatansCache {
 		return get(cacheDir, MAX_SIZE, MAX_COUNT);
 	}
 
-	public static TatansCache get(Context ctx, long max_zise, int max_count) {
-		File f = new File(ctx.getCacheDir(), "ACache");
+	public static TatansCache get( long max_zise, int max_count) {
+		File f = new File(TatansApplication.getContext().getCacheDir(), "ACache");
 		return get(f, max_zise, max_count);
 	}
 
@@ -343,7 +342,7 @@ public class TatansCache {
 	 * @throws FileNotFoundException
 	 *             if the file can not be opened
 	 */
-	public InputStream get(String key) throws FileNotFoundException {
+	public InputStream get1(String key) throws FileNotFoundException {
 		File file = mCache.get(key);
 		if (!file.exists())
 			return null;

@@ -42,11 +42,11 @@ public class SoundPoolUtil implements Runnable {
 	private SoundFileListener soundFileListener = new SoundFileImpl();
 
 	/**
-	 * @param context
+	 * @param String path
 	 */
 	@SuppressLint("UseSparseArrays")
-	public SoundPoolUtil(Context context, String path) {
-		this.context = context;
+	public SoundPoolUtil(String path) {
+		this.context = TatansApplication.getContext();
 		this.path = path;
 		assetManager = context.getAssets();
 		soundPoolMap = new HashMap<Integer, Integer>();
@@ -58,12 +58,12 @@ public class SoundPoolUtil implements Runnable {
 	}
 
 	/**
-	 * @param context
+	 * @param Map<Integer, Integer> map
 	 */
 	@SuppressLint("UseSparseArrays")
-	public SoundPoolUtil(Context context, Map<Integer, Integer> map) {
+	public SoundPoolUtil( Map<Integer, Integer> map) {
 		this.map = map;
-		this.context = context;
+		this.context = TatansApplication.getContext();
 		soundPoolMap = new HashMap<Integer, Integer>();
 		mgr = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);

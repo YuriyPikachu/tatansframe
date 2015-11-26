@@ -1,5 +1,6 @@
 package net.tatans.coeus.network.tools;
 
+import net.tatans.coeus.exception.ApplicationException;
 import android.app.Application;
 import android.content.Context;
 
@@ -36,7 +37,7 @@ public class TatansApplication extends Application{
 	 */
 	public static Context getContext() {
 		if (sContext == null) {
-//			throw new GlobalException(GlobalException.APPLICATION_CONTEXT_IS_NULL);
+			throw new ApplicationException("没有注册TatansApplication类");
 		}
 		return sContext;
 	}

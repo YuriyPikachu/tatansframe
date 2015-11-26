@@ -1,6 +1,5 @@
 package net.tatans.coeus.network.tools;
 
-import android.content.Context;
 import android.util.TypedValue;
 
 /**
@@ -23,10 +22,10 @@ public class TatansDensity
    * @param val
    * @return
    */
-   public static int dp2px(Context context, float dpVal)  
+   public static int dp2px( float dpVal)  
       {  
           return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,  
-                  dpVal, context.getResources().getDisplayMetrics());  
+                  dpVal, TatansApplication.getContext().getResources().getDisplayMetrics());  
       }  
 
       /**
@@ -36,10 +35,10 @@ public class TatansDensity
        * @param val
        * @return
        */
-      public static int sp2px(Context context, float spVal)  
+      public static int sp2px( float spVal)  
       {  
           return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,  
-                  spVal, context.getResources().getDisplayMetrics());  
+                  spVal, TatansApplication.getContext().getResources().getDisplayMetrics());  
       }  
 
       /**
@@ -49,9 +48,9 @@ public class TatansDensity
        * @param pxVal
        * @return
        */
-      public static float px2dp(Context context, float pxVal)  
+      public static float px2dp( float pxVal)  
       {  
-          final float scale = context.getResources().getDisplayMetrics().density;  
+          final float scale = TatansApplication.getContext().getResources().getDisplayMetrics().density;  
           return (pxVal / scale);  
       }
           /**
@@ -61,9 +60,9 @@ public class TatansDensity
            * @param pxVal
            * @return
            */
-          public static float px2sp(Context context, float pxVal)  
+          public static float px2sp( float pxVal)  
           {  
-              return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);  
+              return (pxVal / TatansApplication.getContext().getResources().getDisplayMetrics().scaledDensity);  
           }  
 
       }

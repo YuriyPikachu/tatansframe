@@ -1,6 +1,5 @@
 package net.tatans.coeus.network.tools;
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -22,15 +21,15 @@ public class TatansApp
   /**
    * 获取应用程序名称
    */
-  public static String getAppName(Context context)  
+  public static String getAppName()  
   {  
       try
       {  
-          PackageManager packageManager = context.getPackageManager();  
+          PackageManager packageManager = TatansApplication.getContext().getPackageManager();  
           PackageInfo packageInfo = packageManager.getPackageInfo(  
-                  context.getPackageName(), 0);  
+        		  TatansApplication.getContext().getPackageName(), 0);  
           int labelRes = packageInfo.applicationInfo.labelRes;  
-          return context.getResources().getString(labelRes);  
+          return TatansApplication.getContext().getResources().getString(labelRes);  
       } catch (NameNotFoundException e)  
       {  
           e.printStackTrace();  
@@ -41,16 +40,15 @@ public class TatansApp
   /**
    * [获取应用程序版本名称信息]
    *  
-   * @param context
    * @return 当前应用的版本名称
    */
-  public static String getVersionName(Context context)  
+  public static String getVersionName()  
   {  
       try
       {  
-          PackageManager packageManager = context.getPackageManager();  
+          PackageManager packageManager = TatansApplication.getContext().getPackageManager();  
           PackageInfo packageInfo = packageManager.getPackageInfo(  
-                  context.getPackageName(), 0);  
+        		  TatansApplication.getContext().getPackageName(), 0);  
           return packageInfo.versionName;  
 
       } catch (NameNotFoundException e)  

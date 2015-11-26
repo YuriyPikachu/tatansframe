@@ -42,15 +42,12 @@ public class TatansDb {
 	private TatansDb(DaoConfig config) {
 		if (config == null)
 			throw new DbException("daoConfig is null");
-		if (config.getContext() == null)
-			throw new DbException("android context is null");
 		if (config.getTargetDirectory() != null
 				&& config.getTargetDirectory().trim().length() > 0) {
 			this.db = createDbFileOnSDCard(config.getTargetDirectory(),
 					config.getDbName());
 		} else {
-			this.db = new SqliteDbHelper(config.getContext()
-					.getApplicationContext(), config.getDbName(),
+			this.db = new SqliteDbHelper(TatansApplication.getContext(), config.getDbName(),
 					config.getDbVersion(), config.getDbUpdateListener())
 					.getWritableDatabase();
 		}
@@ -69,24 +66,19 @@ public class TatansDb {
 	/**
 	 * 创建TatansDb
 	 * 
-	 * @param context
 	 */
-	public static TatansDb create(Context context) {
+	public static TatansDb create() {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		return create(config);
 	}
 
 	/**
 	 * 创建TatansDb
-	 * 
-	 * @param context
 	 * @param isDebug
 	 *            是否是debug模式（debug模式进行数据库操作的时候将会打印sql语句）
 	 */
-	public static TatansDb create(Context context, boolean isDebug) {
+	public static TatansDb create(boolean isDebug) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setDebug(isDebug);
 		return create(config);
 
@@ -95,13 +87,11 @@ public class TatansDb {
 	/**
 	 * 创建TatansDb
 	 * 
-	 * @param context
 	 * @param dbName
 	 *            数据库名称
 	 */
-	public static TatansDb create(Context context, String dbName) {
+	public static TatansDb create(String dbName) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setDbName(dbName);
 		return create(config);
 	}
@@ -109,15 +99,13 @@ public class TatansDb {
 	/**
 	 * 创建 TatansDb
 	 * 
-	 * @param context
 	 * @param dbName
 	 *            数据库名称
 	 * @param isDebug
 	 *            是否为debug模式（debug模式进行数据库操作的时候将会打印sql语句）
 	 */
-	public static TatansDb create(Context context, String dbName, boolean isDebug) {
+	public static TatansDb create(String dbName, boolean isDebug) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setDbName(dbName);
 		config.setDebug(isDebug);
 		return create(config);
@@ -130,10 +118,9 @@ public class TatansDb {
 	 * @param dbName
 	 *            数据库名称
 	 */
-	public static TatansDb create(Context context, String targetDirectory,
+	public static TatansDb create(String targetDirectory,
 			String dbName) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setDbName(dbName);
 		config.setTargetDirectory(targetDirectory);
 		return create(config);
@@ -148,10 +135,9 @@ public class TatansDb {
 	 * @param isDebug
 	 *            是否为debug模式（debug模式进行数据库操作的时候将会打印sql语句）
 	 */
-	public static TatansDb create(Context context, String targetDirectory,
+	public static TatansDb create(String targetDirectory,
 			String dbName, boolean isDebug) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setTargetDirectory(targetDirectory);
 		config.setDbName(dbName);
 		config.setDebug(isDebug);
@@ -161,8 +147,6 @@ public class TatansDb {
 	/**
 	 * 创建 TatansDb
 	 * 
-	 * @param context
-	 *            上下文
 	 * @param dbName
 	 *            数据库名字
 	 * @param isDebug
@@ -173,10 +157,9 @@ public class TatansDb {
 	 *            数据库升级监听器：如果监听器为null，升级的时候将会清空所所有的数据
 	 * @return
 	 */
-	public static TatansDb create(Context context, String dbName,
+	public static TatansDb create(String dbName,
 			boolean isDebug, int dbVersion, DbUpdateListener dbUpdateListener) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setDbName(dbName);
 		config.setDebug(isDebug);
 		config.setDbVersion(dbVersion);
@@ -200,11 +183,10 @@ public class TatansDb {
 	 *            ：如果监听器为null，升级的时候将会清空所所有的数据
 	 * @return
 	 */
-	public static TatansDb create(Context context, String targetDirectory,
+	public static TatansDb create(String targetDirectory,
 			String dbName, boolean isDebug, int dbVersion,
 			DbUpdateListener dbUpdateListener) {
 		DaoConfig config = new DaoConfig();
-		config.setContext(context);
 		config.setTargetDirectory(targetDirectory);
 		config.setDbName(dbName);
 		config.setDebug(isDebug);
@@ -766,25 +748,16 @@ public class TatansDb {
 
 	private void debugSql(String sql) {
 		if (config != null && config.isDebug())
-			android.util.Log.d("Debug SQL", ">>>>>>  " + sql);
+			android.util.Log.d("TAG", ">>>>>>  " + sql);
 	}
 
 	public static class DaoConfig {
-		private Context mContext = null; // android上下文
 		private String mDbName = "tatans.db"; // 数据库名字
 		private int dbVersion = 1; // 数据库版本
 		private boolean debug = true; // 是否是调试模式（调试模式 增删改查的时候显示SQL语句）
 		private DbUpdateListener dbUpdateListener;
 		// private boolean saveOnSDCard = false;//是否保存到SD卡
 		private String targetDirectory;// 数据库文件在sd卡中的目录
-
-		public Context getContext() {
-			return mContext;
-		}
-
-		public void setContext(Context context) {
-			this.mContext = context;
-		}
 
 		public String getDbName() {
 			return mDbName;

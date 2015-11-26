@@ -19,10 +19,7 @@ import java.util.regex.Pattern;
 
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -41,7 +38,7 @@ import android.widget.Toast;
 @SuppressLint("SdCardPath")
 public class CrashHandler implements UncaughtExceptionHandler {
 
-	public static final String TAG = "CRASH";
+	public static final String TAG = "CrashHandler";
 	public static String CRASH_PATH = "/tatans/crash/";
 	// CrashHandler 实例
 	private static CrashHandler INSTANCE = new CrashHandler();
@@ -80,8 +77,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	 * 
 	 * @param context
 	 */
-	public void init(Context context) {
-		mContext = context;
+	public void init() {
+		mContext = TatansApplication.getContext();
 		// 获取系统默认的 UncaughtException 处理器
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 
@@ -91,24 +88,21 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	/**
 	 * 初始化
 	 * 
-	 * @param context
 	 * @param sDir 
 	 * 	默认保存的路径
 	 */
-	public void init(Context context,String sDir) {
+	public void init(String sDir) {
 		CRASH_PATH="/"+sDir+"/crash/";
-		init(context);
+		init();
 	}
 	/**
 	 * 初始化
-	 * 
-	 * @param context
 	 * @param sDir 
 	 * 	默认保存的路径
 	 */
-	public void initTatans(Context context,String sDir) {
+	public void initTatans(String sDir) {
 		CRASH_PATH="/tatans/"+sDir+"/crash/";
-		init(context);
+		init();
 	}
 	/**
 	 * 当 UncaughtException 发生时会转入该函数来处理
@@ -162,7 +156,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	 * 
 	 * @param ctx
 	 */
-	public String collectDeviceInfo(Context ctx, boolean flag) {
+	private String collectDeviceInfo(Context ctx, boolean flag) {
 		String string_buf;
 		try {
 			PackageManager pm = ctx.getPackageManager();
@@ -253,7 +247,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	 * @param e
 	 * @return
 	 */
-	public StringBuffer getTraceInfo(Throwable e) {
+	private StringBuffer getTraceInfo(Throwable e) {
 		StringBuffer sb = new StringBuffer();
 
 		Throwable ex = e.getCause() == null ? e : e.getCause();
@@ -277,23 +271,18 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	 * 
 	 * @param e
 	 */
-	public void setError(String e) {
+	public void setError(String strErr) {
 		Pattern pattern;
 		Matcher matcher;
 		for (Entry<String, String> m : regexMap.entrySet()) {
-			Log.e(TAG, e + "key:" + m.getKey() + "; value:" + m.getValue());
+			Log.e(TAG, strErr + "key:" + m.getKey() + "; value:" + m.getValue());
 			pattern = Pattern.compile(m.getKey());
-			matcher = pattern.matcher(e);
+			matcher = pattern.matcher(strErr);
 			if (matcher.matches()) {
 				error = m.getValue();
 				break;
 			}
 		}
-	}
-
-
-	public String getError() {
-		return error;
 	}
 
 }

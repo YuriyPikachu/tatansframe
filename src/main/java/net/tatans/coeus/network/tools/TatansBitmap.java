@@ -45,22 +45,21 @@ public class TatansBitmap {
 	private static TatansBitmap mFinalBitmap;
 	
 	////////////////////////// config method start////////////////////////////////////
-	private TatansBitmap(Context context) {
-		mContext = context;
-		mConfig = new FinalBitmapConfig(context);
-		configDiskCachePath(Utils.getDiskCacheDir(context, "afinalCache").getAbsolutePath());//配置缓存路径
+	private TatansBitmap() {
+		mContext = TatansApplication.getContext();
+		mConfig = new FinalBitmapConfig(TatansApplication.getContext());
+		configDiskCachePath(Utils.getDiskCacheDir(TatansApplication.getContext(), "afinalCache").getAbsolutePath());//配置缓存路径
 		configDisplayer(new SimpleDisplayer());//配置显示器
 		configDownlader(new SimpleDownloader());//配置下载器
 	}
 	
 	/**
 	 * 创建finalbitmap
-	 * @param ctx
 	 * @return
 	 */
-	public static synchronized TatansBitmap create(Context ctx){
+	public static synchronized TatansBitmap create(){
 		if(mFinalBitmap == null){
-			mFinalBitmap = new TatansBitmap(ctx.getApplicationContext());
+			mFinalBitmap = new TatansBitmap();
 		}
 		return mFinalBitmap;
 	}
