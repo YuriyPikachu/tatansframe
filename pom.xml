@@ -10,7 +10,7 @@
 	<artifactId>coeus-network</artifactId>
 	<packaging>aar</packaging>
 	<name>coeus-network</name>
-	<version>5.0.0-release</version>
+	<version>5.1.0-release</version>
 	<!-- <packaging>apklib</packaging>
 	<version>0.1.9-release</version> -->
 	<description>coeus网络框架</description>
@@ -20,9 +20,9 @@
 			<artifactId>android</artifactId>
 		</dependency>
 		<dependency>
-  			<groupId>net.sf.proguard</groupId>
-  			<artifactId>proguard-wtk-plugin</artifactId>
-  			<version>5.1</version>
+  			<groupId>net.sourceforge.pinyin4j</groupId>
+  			<artifactId>pinyin4j</artifactId>
+  			<version>2.5</version>
 		</dependency>
 	</dependencies>
 </project>
