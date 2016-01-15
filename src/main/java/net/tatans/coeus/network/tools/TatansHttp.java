@@ -54,6 +54,7 @@ import org.apache.http.protocol.SyncBasicHttpContext;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.AsyncTask;
 /**
  * 
  * @author 余亮 <br/>
@@ -73,6 +74,7 @@ public class TatansHttp {
     private final CoeusHttpClient httpClient;
     private final HttpContext httpContext;
     private String charset = "utf-8";
+    private AsyncTask<Object, Object, Object> httpHandler;//取消网络请求
     
     private final Map<String, String> clientHeaderMap;
     
@@ -408,7 +410,7 @@ public class TatansHttp {
             uriRequest.addHeader("Content-Type", contentType);
         }
 
-        new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth).executeOnExecutor(executor, uriRequest);
+        httpHandler=new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth).executeOnExecutor(executor, uriRequest);
 
     }
     @SuppressLint("NewApi")
@@ -466,6 +468,12 @@ public class TatansHttp {
         @Override
         public long getContentLength() {
             return -1;
+        }
+    }
+    @SuppressLint("NewApi")
+	public void cancelRequest() {
+        if(httpHandler != null) {
+        	httpHandler.cancel(true);
         }
     }
 }

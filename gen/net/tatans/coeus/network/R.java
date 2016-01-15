@@ -29,7 +29,11 @@ public final class R {
         public static int logo=0x7f020005;
     }
     public static final class id {
-        public static int action_settings=0x7f090008;
+        public static int action_settings=0x7f09000e;
+        public static int catalog=0x7f09000c;
+        public static int edt_search=0x7f090008;
+        public static int layout=0x7f09000b;
+        public static int listView=0x7f090009;
         public static int login=0x7f090005;
         public static int login_div=0x7f090000;
         public static int login_password_input=0x7f090003;
@@ -37,10 +41,14 @@ public final class R {
         public static int message=0x7f090006;
         public static int miniTwitter_logo=0x7f090007;
         public static int password_edit=0x7f090004;
+        public static int title=0x7f09000d;
+        public static int tv=0x7f09000a;
         public static int username_edit=0x7f090002;
     }
     public static final class layout {
         public static int account_login=0x7f030000;
+        public static int sort_activity=0x7f030001;
+        public static int sort_item=0x7f030002;
     }
     public static final class menu {
         public static int main=0x7f080000;
