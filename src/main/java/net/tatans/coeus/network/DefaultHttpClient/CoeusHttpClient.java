@@ -3,7 +3,7 @@ package net.tatans.coeus.network.DefaultHttpClient;
 import java.io.IOException;
 import java.util.List;
 
-import net.tatans.coeus.network.speaker.Speaker;
+import net.tatans.coeus.network.tools.TatansToast;
 import net.tatans.coeus.network.util.HttpProces;
 import net.tatans.coeus.network.util.HttpTool;
 import net.tatans.coeus.network.util.HttpTool.getTicketCallBackInterface;
@@ -56,8 +56,7 @@ public class CoeusHttpClient extends DefaultHttpClient{
 			final HttpTool ht = new HttpTool();
 			if(!ht.hasNetworkConnection(context)){
 				HttpProces.failHttp();
-				Speaker s = Speaker.getInstance(context);
-				s.speech("当前网络未连接，请重新连接网络再尝试。"); 
+				TatansToast.showAndCancel("当前网络未连接，请重新连接网络再尝试。"); 
 				return null;
 			}
 			HttpProces.startHttp();
@@ -104,8 +103,7 @@ public class CoeusHttpClient extends DefaultHttpClient{
 			try {
 				httpRespone= execute(request, (HttpContext) null);
 			} catch (ConnectTimeoutException e) {
-				Speaker speakerPorcess=Speaker.getInstance(context);
-				speakerPorcess.speech("网络访问超时,请重新连接。");
+				TatansToast.showAndCancel("网络访问超时,请重新连接。");
 				HttpProces.failHttp();
 				Log.d("NetWork", "HyperionHttpClient->execute"+e.toString());
 			}

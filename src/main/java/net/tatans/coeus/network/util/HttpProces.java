@@ -3,8 +3,8 @@ package net.tatans.coeus.network.util;
 import java.util.HashMap;
 
 import net.tatans.coeus.network.R;
-import net.tatans.coeus.network.speaker.Speaker;
 import net.tatans.coeus.network.tools.SoundPoolUtil;
+import net.tatans.coeus.network.tools.TatansToast;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -70,8 +70,7 @@ public class HttpProces {
 	}
 
 	public static void cancelHttp(final Context context) {
-		Speaker s = Speaker.getInstance(context);
-		s.speech("当前网络未连接，请重新连接网络再尝试。");
+		TatansToast.showAndCancel("当前网络未连接，请重新连接网络再尝试。");
 	/*	final Speaker s = Speaker.getInstance(context.getApplicationContext());
 		if (AuthenticatorActivity.bLoginCreate) {
 			s.speech("连接网络失败，正在进入无线网络连接。");

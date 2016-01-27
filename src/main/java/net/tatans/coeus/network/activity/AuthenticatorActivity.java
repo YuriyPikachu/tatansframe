@@ -7,8 +7,8 @@ import org.json.JSONException;
 import net.tatans.coeus.network.R;
 import net.tatans.coeus.network.account.Accounts;
 import net.tatans.coeus.network.account.Accounts.initAccountCallBackInterface;
-import net.tatans.coeus.network.speaker.Speaker;
 import net.tatans.coeus.network.tools.JsonUtil;
+import net.tatans.coeus.network.tools.TatansToast;
 import net.tatans.coeus.network.util.Constants;
 import net.tatans.coeus.network.util.HttpProces;
 import net.tatans.coeus.network.util.HttpTool;
@@ -71,7 +71,6 @@ public class AuthenticatorActivity extends Activity {
 	private static initAccountCallBackInterface callback;
 	private String mUsername;
 
-	private Speaker speaker;
 
 	private EditText mUsernameEdit;
 
@@ -171,7 +170,7 @@ public class AuthenticatorActivity extends Activity {
 				mAccountManager.addAccountExplicitly(account, sTgt, bUser);
 			} catch (Exception e) {
 				e.printStackTrace();
-				speaker.speech("请从官方正常渠道下载该应用");
+				TatansToast.showAndCancel("请从官方正常渠道下载该应用");
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e1) {
@@ -212,7 +211,7 @@ public class AuthenticatorActivity extends Activity {
 			Log.e(TAG,
 					"AuthenticatorActivity->onAuthenticationResult: failed to authenticate___"
 							+ mRequestNewAccount);
-			speaker.speech("密码输入错误,请重新输入");
+			TatansToast.showAndCancel("密码输入错误,请重新输入");
 			if (mRequestNewAccount) {
 				// "Please enter a valid username/password.
 				mMessage.setText(getText(R.string.login_activity_loginfail_text_pwonly));
@@ -303,7 +302,7 @@ public class AuthenticatorActivity extends Activity {
 		getString(R.string.label);
 		if (TextUtils.isEmpty(mPassword)) {
 			// We have an account but no password
-			speaker.speech("密码不能为空，请输入密码");
+			TatansToast.showAndCancel("密码不能为空，请输入密码");
 			return getText(R.string.login_activity_loginfail_text_pwmissing);
 		}
 		return null;

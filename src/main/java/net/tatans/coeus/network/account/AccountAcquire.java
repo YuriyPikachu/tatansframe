@@ -1,7 +1,7 @@
 package net.tatans.coeus.network.account;
 
 
-import net.tatans.coeus.network.speaker.Speaker;
+import net.tatans.coeus.network.tools.TatansToast;
 import net.tatans.coeus.network.util.Constants;
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -31,8 +31,7 @@ public class AccountAcquire {
 			try {
 				strUser = mAccountManager.getUserData(accounts[0], sUser);
 			} catch (Exception e) {
-				Speaker s =Speaker.getInstance(context.getApplicationContext());
-				s.speech("请从官方正常渠道下载该应用");
+				TatansToast.showAndCancel("请从官方正常渠道下载该应用");
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e1) {
