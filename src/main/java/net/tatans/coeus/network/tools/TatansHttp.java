@@ -75,6 +75,7 @@ public class TatansHttp {
     private final HttpContext httpContext;
     private String charset = "utf-8";
     private AsyncTask<Object, Object, Object> httpHandler;//取消网络请求
+    private AsyncTask<Object, Object, Object> httpAsyncHandler;//取消网络请求
     
     private final Map<String, String> clientHeaderMap;
     
@@ -419,7 +420,7 @@ public class TatansHttp {
             uriRequest.addHeader("Content-Type", contentType);
         }
 
-        new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth).executeOnExecutor(executorAync, uriRequest);
+        httpAsyncHandler=new HttpHandler<T>(client, httpContext, ajaxCallBack,charset,context,oauth).executeOnExecutor(executorAync, uriRequest);
 
     }
     protected Object sendSyncRequest(CoeusHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType) {
@@ -474,6 +475,12 @@ public class TatansHttp {
 	public void cancelRequest() {
         if(httpHandler != null) {
         	httpHandler.cancel(true);
+        }
+    }
+    @SuppressLint("NewApi")
+	public void cancelAsyncRequest() {
+        if(httpAsyncHandler != null) {
+        	httpAsyncHandler.cancel(true);
         }
     }
 }

@@ -10,7 +10,7 @@
 	<artifactId>coeus-network</artifactId>
 	<packaging>aar</packaging>
 	<name>coeus-network</name>
-	<version>5.2.0-release</version>
+	<version>5.3.0-release</version>
 	<!-- <packaging>apklib</packaging>
 	<version>0.1.9-release</version> -->
 	<description>coeus网络框架</description>
@@ -18,11 +18,6 @@
 	    <dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
-		</dependency>
-		<dependency>
-  			<groupId>net.sourceforge.pinyin4j</groupId>
-  			<artifactId>pinyin4j</artifactId>
-  			<version>2.5</version>
 		</dependency>
 	</dependencies>
 </project>

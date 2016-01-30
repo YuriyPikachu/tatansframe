@@ -1,5 +1,8 @@
 package net.tatans.coeus.network.tools;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 /**
  * @author 余亮 <br/> 
@@ -110,9 +113,12 @@ public class TatansToast
    * 取消Toast显示
    *  
    */
-  public static void cancel()  
+  @SuppressLint("NewApi")
+public static void cancel()  
   {  
       if (isShow){
+    	  AccessibilityManager accessibilityManager = (AccessibilityManager) TatansApplication.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+	      accessibilityManager.interrupt();
     	  if(null!=mToast)
     		  mToast.cancel();
       }  
